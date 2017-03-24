@@ -1,4 +1,6 @@
-var results = document.querySelector("#results");
+var results, searchWord;
+
+results = document.querySelector("#results");
 
 function renderWords(words) {
   var wordDivs = words.map(function (word) {
@@ -15,20 +17,21 @@ function renderEmpty() {
 function filterWords(prefix) {
   var filtered;
 
-  // a.) Write some code filter the data that starts with
-  //      the provided prefix
-  //
-  // b.) Limit filtered to the first 10 words. Hint: lookup slice.
+  filtered = data
+    .filter(function (word) { return word.startsWith(prefix); })
+    .slice(0, 9);
 
   renderWords(filtered);
 }
 
-// 1.) Select the "#searchWord" input element. Save it to a variable called searchWord.
-// 2.) Listen for a keyup on searchWord.
-// 3.) Log the value of searchWord on each keyup.
-// 4.) If searchWord value has zero length renderEmpty
-    // otherwise call filterWords with the value.
+searchWord = document.querySelector("#searchWord");
 
+searchWord.addEventListener("keyup", function () {
+  if (searchWord.value.length === 0) {
+    renderEmpty();
+  } else {
+    filterWords(searchWord.value);
+  }
+});
 
-// What happens if you remove this?
 renderEmpty();
